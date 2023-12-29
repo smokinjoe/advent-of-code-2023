@@ -3,6 +3,7 @@ import makeCachedMatcher from "wouter/matcher";
 import { pathToRegexp, Key } from "path-to-regexp";
 
 import { DayOne } from "./components/Days/DayOne/DayOne";
+import { DayTwo } from "./components/Days/DayTwo/DayTwo";
 
 import "./styles.css";
 
@@ -45,6 +46,7 @@ const App = () => {
         <nav>
           <ActiveLink href="/">Home</ActiveLink>
           <ActiveLink href="/day-one">Day One</ActiveLink>
+          <ActiveLink href="/day-two">Day Two</ActiveLink>
         </nav>
 
         <main>
@@ -53,6 +55,9 @@ const App = () => {
 
             <Route path="/day-one">
               <DayOne />
+            </Route>
+            <Route path="/day-two">
+              <DayTwo />
             </Route>
             <Route path="/:anything*">
               <center>
