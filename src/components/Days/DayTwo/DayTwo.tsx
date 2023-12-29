@@ -4,26 +4,26 @@ import { useState } from "react";
 import { partOneHandler } from "./partOne";
 import { partTwoHandler } from "./partTwo";
 
-export const DayOne = () => {
+export const DayTwo = () => {
   const [data, setData] = useState("");
-  const [dayOneResult, setDayOneResult] = useState<number>(0);
+  const [dayTwoResult, setDayTwoResult] = useState<number>(0);
 
   const handlePartOneClick = () => {
     const result = partOneHandler(data);
-    setDayOneResult(result);
+    setDayTwoResult(result);
   };
 
   const handlePartTwoClick = () => {
     const result = partTwoHandler(data);
-    setDayOneResult(result);
+    setDayTwoResult(result);
   };
 
   return (
     <div className="App">
-      <h1>Day One</h1>
+      <h1>Day Two</h1>
       <p>
         <a
-          href="https://adventofcode.com/2023/day/1"
+          href="https://adventofcode.com/2023/day/2"
           target="_blank"
           rel="noreferrer"
         >
@@ -47,9 +47,8 @@ export const DayOne = () => {
           Run Part Two
         </button>
       </div>
-
       <div>
-        <input type="text" value={dayOneResult} readOnly />
+        <input type="text" value={dayTwoResult} readOnly />
       </div>
     </div>
   );
