@@ -24,6 +24,18 @@ export class GameRecord {
   public id: number = -1;
   public setHistory: Array<GameSet> = [];
 
+  private getMinimumRequired = (color: keyof SingleSet) => {
+    let minimumRequired = 0;
+
+    this.setHistory.forEach((set) => {
+      if (set[color] > minimumRequired) {
+        minimumRequired = set[color];
+      }
+    });
+
+    return minimumRequired;
+  };
+
   constructor(record: string) {
     const [id, sets] = record.split(":");
     this.id = parseInt(id.replace("Game ", "").trim());
@@ -68,5 +80,13 @@ export class GameRecord {
     }
 
     return 0;
+  };
+
+  getPowerOfSet = () => {
+    const minimumRequiredRed = this.getMinimumRequired("red");
+    const minimumRequiredBlue = this.getMinimumRequired("blue");
+    const minimumRequiredGreen = this.getMinimumRequired("green");
+
+    return minimumRequiredRed * minimumRequiredBlue * minimumRequiredGreen;
   };
 }

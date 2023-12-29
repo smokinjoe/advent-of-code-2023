@@ -20,8 +20,16 @@ export const DayTwo = () => {
 
   return (
     <div className="App">
-      <h1>Hello Day Two</h1>
-      <h2>Start editing to see some magic happen!</h2>
+      <h1>Day Two</h1>
+      <p>
+        <a
+          href="https://adventofcode.com/2023/day/2"
+          target="_blank"
+          rel="noreferrer"
+        >
+          source
+        </a>
+      </p>
       <div>
         <textarea
           cols={20}
@@ -39,7 +47,6 @@ export const DayTwo = () => {
           Run Part Two
         </button>
       </div>
-
       <div>
         <input type="text" value={dayTwoResult} readOnly />
       </div>

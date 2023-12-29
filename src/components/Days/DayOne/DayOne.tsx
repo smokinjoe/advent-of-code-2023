@@ -20,8 +20,16 @@ export const DayOne = () => {
 
   return (
     <div className="App">
-      <h1>Hello Day One</h1>
-      <h2>Start editing to see some magic happen!</h2>
+      <h1>Day One</h1>
+      <p>
+        <a
+          href="https://adventofcode.com/2023/day/1"
+          target="_blank"
+          rel="noreferrer"
+        >
+          source
+        </a>
+      </p>
       <div>
         <textarea
           cols={20}
