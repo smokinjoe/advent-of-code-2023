@@ -43,8 +43,6 @@ const App = () => {
     <Router matcher={customMatcher}>
       <div className="App">
         <nav>
-          <a href="/">Home</a>
-          <a href="/day-one">Day One</a>
           <ActiveLink href="/">Home</ActiveLink>
           <ActiveLink href="/day-one">Day One</ActiveLink>
         </nav>
