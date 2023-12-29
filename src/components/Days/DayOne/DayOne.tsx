@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
 
-import { partOneHandler } from "./script";
+import { partOneHandler } from "./partOne";
+import { partTwoHandler } from "./partTwo";
 
 export const DayOne = () => {
   const [data, setData] = useState("");
@@ -9,6 +10,11 @@ export const DayOne = () => {
 
   const handlePartOneClick = () => {
     const result = partOneHandler(data);
+    setDayOneResult(result);
+  };
+
+  const handlePartTwoClick = () => {
+    const result = partTwoHandler(data);
     setDayOneResult(result);
   };
 
@@ -26,6 +32,11 @@ export const DayOne = () => {
       <div>
         <button onClick={handlePartOneClick} disabled={data.length === 0}>
           Run Part One
+        </button>
+      </div>
+      <div>
+        <button onClick={handlePartTwoClick} disabled={data.length === 0}>
+          Run Part Two
         </button>
       </div>
 
