@@ -1,6 +1,8 @@
 import { convertMultiLineStringToArray } from "../../../utils/stringReader";
 
 /*
+// Test data
+
 467..114..
 ...*......
 ..35..633.
@@ -14,11 +16,19 @@ import { convertMultiLineStringToArray } from "../../../utils/stringReader";
 
 11....
 .*....
+
+..23..
+..*...
+.....*
+...55.
 */
 
 const isNumber = (value: string): boolean => !isNaN(Number(value));
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 const isSymbol = (value: string): boolean =>
   value.match(/^[@#$%&*-+=//]*$/) ? true : false;
+const isEngineSymbol = (value: string): boolean =>
+  !isNumber(value) && value !== ".";
 
 class EngineSchematic {
   public rows: string[][] = [[]];
@@ -28,6 +38,7 @@ class EngineSchematic {
   public endOfSchematic: boolean = true;
 
   // TODO: This is removing valid values
+  // Now is unused
   private deDupeStoredNumbers = () => {
     const uniqueNumbers = new Set(this.storedNumbers);
     this.storedNumbers = Array.from(uniqueNumbers);
@@ -48,69 +59,122 @@ class EngineSchematic {
     }
 
     const number = Number(numberArray.join(""));
-    this.storedNumbers.push(number);
+    return number;
   };
 
   private checkItem = (posX: number, posY: number) => {
     const row = this.rows[posY];
-    if (row) {
-      const itemAbove = row[posX];
-      if (isNumber(itemAbove)) {
-        this.parsePosition(posX, posY);
-      }
+    if (!row) {
+      return;
+    }
+    const itemAbove = row[posX];
+    if (isNumber(itemAbove)) {
+      return this.parsePosition(posX, posY);
     }
   };
 
   private checkUpAndToLeft = () => {
     const posY = this.currentRow - 1;
     const posX = this.currentColumn - 1;
-    this.checkItem(posX, posY);
+    return this.checkItem(posX, posY);
   };
   private checkUp = () => {
     const posY = this.currentRow - 1;
     const posX = this.currentColumn;
-    this.checkItem(posX, posY);
+    return this.checkItem(posX, posY);
   };
   private checkUpAndToRight = () => {
     const posY = this.currentRow - 1;
     const posX = this.currentColumn + 1;
-    this.checkItem(posX, posY);
+    return this.checkItem(posX, posY);
   };
   private checkLeft = () => {
     const posY = this.currentRow;
     const posX = this.currentColumn - 1;
-    this.checkItem(posX, posY);
+    return this.checkItem(posX, posY);
   };
   private checkRight = () => {
     const posY = this.currentRow;
     const posX = this.currentColumn + 1;
-    this.checkItem(posX, posY);
+    return this.checkItem(posX, posY);
   };
   private checkDownAndToLeft = () => {
     const posY = this.currentRow + 1;
     const posX = this.currentColumn - 1;
-    this.checkItem(posX, posY);
+    return this.checkItem(posX, posY);
   };
   private checkDown = () => {
     const posY = this.currentRow + 1;
     const posX = this.currentColumn;
-    this.checkItem(posX, posY);
+    return this.checkItem(posX, posY);
   };
   private checkDownAndToRight = () => {
     const posY = this.currentRow + 1;
     const posX = this.currentColumn + 1;
-    this.checkItem(posX, posY);
+    return this.checkItem(posX, posY);
+  };
+
+  private addToStoredNumbers = (n: number | undefined) => {
+    if (n) {
+      this.storedNumbers.push(n);
+    }
+  };
+
+  // Shout out to https://www.reddit.com/r/adventofcode/comments/18stssw/aoc_2023_day_3_late_starter_could_use_some_help/
+  // for inspiration!
+  private validateAndAddToStoredNumbers = (
+    n1: number | undefined,
+    n2: number | undefined,
+    n3: number | undefined
+  ) => {
+    if (n1 === n2 && n2 === n3) {
+      this.addToStoredNumbers(n1);
+    } else if (n1 === n2) {
+      this.addToStoredNumbers(n1);
+      this.addToStoredNumbers(n3);
+    } else if (n1 === n3) {
+      this.addToStoredNumbers(n1);
+      this.addToStoredNumbers(n2);
+    } else if (n2 === n3) {
+      this.addToStoredNumbers(n1);
+      this.addToStoredNumbers(n2);
+    } else {
+      this.addToStoredNumbers(n1);
+      this.addToStoredNumbers(n2);
+      this.addToStoredNumbers(n3);
+    }
+  };
+
+  private checkAboveSpaces = () => {
+    const upAndToTheLeft = this.checkUpAndToLeft();
+    const up = this.checkUp();
+    const upAndToTheRight = this.checkUpAndToRight();
+    this.validateAndAddToStoredNumbers(upAndToTheLeft, up, upAndToTheRight);
+  };
+
+  private checkSideSpaces = () => {
+    const left = this.checkLeft();
+    const right = this.checkRight();
+
+    this.addToStoredNumbers(left);
+    this.addToStoredNumbers(right);
+  };
+
+  private checkBelowSpaces = () => {
+    const downAndToTheLeft = this.checkDownAndToLeft();
+    const down = this.checkDown();
+    const downAndToTheRight = this.checkDownAndToRight();
+    this.validateAndAddToStoredNumbers(
+      downAndToTheLeft,
+      down,
+      downAndToTheRight
+    );
   };
 
   private checkSpaces = () => {
-    this.checkUpAndToLeft();
-    this.checkUp();
-    this.checkUpAndToRight();
-    this.checkLeft();
-    this.checkRight();
-    this.checkDownAndToLeft();
-    this.checkDown();
-    this.checkDownAndToRight();
+    this.checkAboveSpaces();
+    this.checkSideSpaces();
+    this.checkBelowSpaces();
   };
 
   constructor(public stringArray: string[]) {
@@ -126,7 +190,7 @@ class EngineSchematic {
     const currentRow = this.rows[this.currentRow];
     const currentColumn = currentRow[this.currentColumn];
 
-    if (isSymbol(currentColumn)) {
+    if (isEngineSymbol(currentColumn)) {
       this.checkSpaces();
     }
 
@@ -136,8 +200,6 @@ class EngineSchematic {
     } else {
       this.currentRow++;
     }
-
-    this.deDupeStoredNumbers();
 
     if (this.currentColumn >= this.rows[0].length) {
       this.endOfSchematic = true;
