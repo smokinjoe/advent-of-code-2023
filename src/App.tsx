@@ -4,6 +4,7 @@ import { pathToRegexp, Key } from "path-to-regexp";
 
 import { DayOne } from "./components/Days/DayOne/DayOne";
 import { DayTwo } from "./components/Days/DayTwo/DayTwo";
+import { DayThree } from "./components/Days/DayThree/DayThree";
 
 import "./styles.css";
 
@@ -47,6 +48,7 @@ const App = () => {
           <ActiveLink href="/">Home</ActiveLink>
           <ActiveLink href="/day-one">Day One</ActiveLink>
           <ActiveLink href="/day-two">Day Two</ActiveLink>
+          <ActiveLink href="/day-three">Day Three</ActiveLink>
         </nav>
 
         <main>
@@ -58,6 +60,9 @@ const App = () => {
             </Route>
             <Route path="/day-two">
               <DayTwo />
+            </Route>
+            <Route path="/day-three">
+              <DayThree />
             </Route>
             <Route path="/:anything*">
               <center>
