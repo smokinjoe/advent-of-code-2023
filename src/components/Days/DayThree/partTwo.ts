@@ -36,6 +36,5 @@ export const partTwoHandler = (data: string): number => {
     engineSchematic.nextItem();
   }
 
-  //   return engineSchematic.getSumOfGearRatios();
-  return 0;
+  return engineSchematic.getSumOfGearRatios();
 };

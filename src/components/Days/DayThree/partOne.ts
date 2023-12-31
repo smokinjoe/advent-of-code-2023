@@ -32,5 +32,5 @@ export const partOneHandler = (data: string): number => {
     engineSchematic.nextItem();
   }
 
-  return engineSchematic.getSumOfStoredNumbers();
+  return engineSchematic.getSumOfPartNumbers();
 };
