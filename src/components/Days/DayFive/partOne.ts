@@ -23,22 +23,22 @@ const delimiterToMap = {
 class Garden {
   public seeds: number[] = [];
 
-  public seedToSoilMap: Map<number, number> = new Map();
-  public soilToFertilizerMap: Map<number, number> = new Map();
-  public fertilizerToWaterMap: Map<number, number> = new Map();
-  public waterToLightMap: Map<number, number> = new Map();
-  public lightToTemperatureMap: Map<number, number> = new Map();
-  public temperatureToHumidityMap: Map<number, number> = new Map();
-  public humidityToLocationMap: Map<number, number> = new Map();
+  public seedToSoilMap: Record<number, number> = {};
+  public soilToFertilizerMap: Record<number, number> = {};
+  public fertilizerToWaterMap: Record<number, number> = {};
+  public waterToLightMap: Record<number, number> = {};
+  public lightToTemperatureMap: Record<number, number> = {};
+  public temperatureToHumidityMap: Record<number, number> = {};
+  public humidityToLocationMap: Record<number, number> = {};
 
   private generateMapping = (
-    map: Map<number, number>,
+    map: Record<number, number>,
     destination: number,
     source: number,
     length: number
   ) => {
     for (let i = 0; i < length; i++) {
-      map.set(source + i, destination + i);
+      map[source + i] = destination + i;
     }
   };
 
@@ -66,11 +66,6 @@ class Garden {
 
   constructor(data: string) {
     const dataArray = convertMultiLineStringToArray(data);
-
-    // Set default mappings
-    Object.values(delimiterToMap).forEach((map) => {
-      this.generateMapping(this[map], 0, 0, 100);
-    });
 
     // Extract seeds by popping off initial key/value and converting to number
     const seeds = dataArray.shift()?.replace("seeds: ", "").split(" ");
@@ -104,7 +99,7 @@ class Garden {
       // Iterate through all maps starting from seed-to-soil and ending with humidity-to-location
       let currentValue = seed;
       Object.values(delimiterToMap).forEach((map) => {
-        currentValue = this[map].get(currentValue) ?? -1;
+        currentValue = this[map][currentValue] ?? currentValue;
       });
       locationLengths.push(currentValue);
     });
