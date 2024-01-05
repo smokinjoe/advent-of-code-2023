@@ -20,34 +20,35 @@ const delimiterToMap = {
   [Delimiters.HumidityToLocation]: "humidityToLocationMap",
 } as const;
 
+type MapObject = {
+  source: number;
+  destination: number;
+  length: number;
+};
+
 class Garden {
   public seeds: number[] = [];
 
-  public seedToSoilMap: Record<number, number> = {};
-  public soilToFertilizerMap: Record<number, number> = {};
-  public fertilizerToWaterMap: Record<number, number> = {};
-  public waterToLightMap: Record<number, number> = {};
-  public lightToTemperatureMap: Record<number, number> = {};
-  public temperatureToHumidityMap: Record<number, number> = {};
-  public humidityToLocationMap: Record<number, number> = {};
+  //   private mapObject: MapObject = {
+  //     source: -1,
+  //     destination: -1,
+  //     length: -1,
+  //   };
 
-  private generateMapping = (
-    map: Record<number, number>,
-    destination: number,
-    source: number,
-    length: number
-  ) => {
-    for (let i = 0; i < length; i++) {
-      map[source + i] = destination + i;
-    }
-  };
+  public seedToSoilMap: MapObject[] = [];
+  public soilToFertilizerMap: MapObject[] = [];
+  public fertilizerToWaterMap: MapObject[] = [];
+  public waterToLightMap: MapObject[] = [];
+  public lightToTemperatureMap: MapObject[] = [];
+  public temperatureToHumidityMap: MapObject[] = [];
+  public humidityToLocationMap: MapObject[] = [];
 
   private extractGardenMapData = (
     // TODO: There has to be a cleaner way to do this
     mapPhase: (typeof Delimiters)[keyof typeof Delimiters],
     dataArray: Array<string>
   ) => {
-    const map = this[delimiterToMap[mapPhase]];
+    const mapName = delimiterToMap[mapPhase];
     while (dataArray.length > 0) {
       if ((Object.values(Delimiters) as string[]).includes(dataArray[0])) {
         break;
@@ -60,9 +61,19 @@ class Garden {
       const source = parseInt(sourceString);
       const length = parseInt(lengthString);
 
-      this.generateMapping(map, destination, source, length);
+      this[mapName].push({ destination, source, length });
     }
   };
+
+  //   private generateMappingValue = (map: MapObject, currentValue: number) => {
+  //     // const { destination, source, length } = map;
+
+  //     if (currentValue >= source)
+  //       // if (currentValue >= source && currentValue <= source + length) {
+  //       //   return destination + (currentValue - source);
+  //       // }
+  //       return currentValue;
+  //   };
 
   constructor(data: string) {
     const dataArray = convertMultiLineStringToArray(data);
@@ -94,22 +105,50 @@ class Garden {
 
   public get lowestLocation() {
     const locationLengths: number[] = [];
-
     this.seeds.forEach((seed) => {
-      // Iterate through all maps starting from seed-to-soil and ending with humidity-to-location
       let currentValue = seed;
       Object.values(delimiterToMap).forEach((map) => {
-        currentValue = this[map][currentValue] ?? currentValue;
+        this[map].forEach((mapObject) => {
+          const sourceStart = mapObject.source;
+          const sourceEnd = mapObject.source + mapObject.length - 1;
+          const difference = currentValue - sourceStart;
+          if (sourceStart <= currentValue && currentValue <= sourceEnd) {
+            console.log(
+              "JOE: mapObject.destination + difference: ",
+              mapObject.destination + difference
+            );
+          }
+          currentValue =
+            sourceStart <= currentValue && currentValue <= sourceEnd
+              ? mapObject.destination + difference
+              : currentValue;
+        });
       });
       locationLengths.push(currentValue);
     });
 
-    // and return the lowest location
     return Math.min(...locationLengths);
   }
+
+  //   public get lowestLocation() {
+  //     const locationLengths: number[] = [];
+
+  //     this.seeds.forEach((seed) => {
+  //       // Iterate through all maps starting from seed-to-soil and ending with humidity-to-location
+  //       let currentValue = seed;
+  //       Object.values(delimiterToMap).forEach((map) => {
+  //         // currentValue = this.generateMappingValue(this[map], currentValue);
+  //       });
+  //       locationLengths.push(currentValue);
+  //     });
+
+  //     // and return the lowest location
+  //     return Math.min(...locationLengths);
+  //   }
 }
 
 export const partOneHandler = (data: string) => {
   const garden = new Garden(data);
+  console.log("JOE: garden: ", garden);
   return garden.lowestLocation;
 };
