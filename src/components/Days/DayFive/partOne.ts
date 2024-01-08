@@ -109,6 +109,8 @@ class Garden {
       let currentValue = seed;
       Object.values(delimiterToMap).forEach((map) => {
         this[map].forEach((mapObject) => {
+          console.log('JOE: ===========================================:');
+          console.log('JOE: now checking map: ', map);
           const sourceStart = mapObject.source;
           const sourceEnd = mapObject.source + mapObject.length - 1;
           const difference = currentValue - sourceStart;
@@ -118,10 +120,14 @@ class Garden {
               mapObject.destination + difference
             );
           }
+          console.log('JOE: originalCurrentValue: currentValue: ', currentValue);
           currentValue =
             sourceStart <= currentValue && currentValue <= sourceEnd
               ? mapObject.destination + difference
               : currentValue;
+
+          console.log('JOE: endingCurrentValue: currentValue: ', currentValue);
+
         });
       });
       locationLengths.push(currentValue);
