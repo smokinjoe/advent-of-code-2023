@@ -105,29 +105,30 @@ class Garden {
 
   public get lowestLocation() {
     const locationLengths: number[] = [];
+    let skip = false;
+
     this.seeds.forEach((seed) => {
       let currentValue = seed;
+
       Object.values(delimiterToMap).forEach((map) => {
+        let isValueUpdated = false;
         this[map].forEach((mapObject) => {
-          console.log('JOE: ===========================================:');
-          console.log('JOE: now checking map: ', map);
+          if (isValueUpdated) {
+            return;
+          }
+
           const sourceStart = mapObject.source;
           const sourceEnd = mapObject.source + mapObject.length - 1;
           const difference = currentValue - sourceStart;
+
           if (sourceStart <= currentValue && currentValue <= sourceEnd) {
-            console.log(
-              "JOE: mapObject.destination + difference: ",
-              mapObject.destination + difference
-            );
+            isValueUpdated = true;
+            currentValue = mapObject.destination + difference;
           }
-          console.log('JOE: originalCurrentValue: currentValue: ', currentValue);
-          currentValue =
-            sourceStart <= currentValue && currentValue <= sourceEnd
-              ? mapObject.destination + difference
-              : currentValue;
 
-          console.log('JOE: endingCurrentValue: currentValue: ', currentValue);
-
+          if (!skip) {
+            skip = confirm("Skip to end?");
+          }
         });
       });
       locationLengths.push(currentValue);
@@ -155,6 +156,5 @@ class Garden {
 
 export const partOneHandler = (data: string) => {
   const garden = new Garden(data);
-  console.log("JOE: garden: ", garden);
   return garden.lowestLocation;
 };
