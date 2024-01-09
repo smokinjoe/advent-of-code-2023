@@ -89,8 +89,6 @@ class Garden {
 
   public get lowestLocation() {
     const locationLengths: number[] = [];
-    let skip = false;
-
     this.seeds.forEach((seed) => {
       let currentValue = seed;
 
@@ -108,10 +106,6 @@ class Garden {
           if (sourceStart <= currentValue && currentValue <= sourceEnd) {
             isValueUpdated = true;
             currentValue = mapObject.destination + difference;
-          }
-
-          if (!skip) {
-            skip = confirm("Skip to end?");
           }
         });
       });
