@@ -29,12 +29,6 @@ type MapObject = {
 class Garden {
   public seeds: number[] = [];
 
-  //   private mapObject: MapObject = {
-  //     source: -1,
-  //     destination: -1,
-  //     length: -1,
-  //   };
-
   public seedToSoilMap: MapObject[] = [];
   public soilToFertilizerMap: MapObject[] = [];
   public fertilizerToWaterMap: MapObject[] = [];
@@ -64,16 +58,6 @@ class Garden {
       this[mapName].push({ destination, source, length });
     }
   };
-
-  //   private generateMappingValue = (map: MapObject, currentValue: number) => {
-  //     // const { destination, source, length } = map;
-
-  //     if (currentValue >= source)
-  //       // if (currentValue >= source && currentValue <= source + length) {
-  //       //   return destination + (currentValue - source);
-  //       // }
-  //       return currentValue;
-  //   };
 
   constructor(data: string) {
     const dataArray = convertMultiLineStringToArray(data);
@@ -136,22 +120,6 @@ class Garden {
 
     return Math.min(...locationLengths);
   }
-
-  //   public get lowestLocation() {
-  //     const locationLengths: number[] = [];
-
-  //     this.seeds.forEach((seed) => {
-  //       // Iterate through all maps starting from seed-to-soil and ending with humidity-to-location
-  //       let currentValue = seed;
-  //       Object.values(delimiterToMap).forEach((map) => {
-  //         // currentValue = this.generateMappingValue(this[map], currentValue);
-  //       });
-  //       locationLengths.push(currentValue);
-  //     });
-
-  //     // and return the lowest location
-  //     return Math.min(...locationLengths);
-  //   }
 }
 
 export const partOneHandler = (data: string) => {
