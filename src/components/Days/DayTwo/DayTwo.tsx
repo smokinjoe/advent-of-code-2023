@@ -7,7 +7,7 @@ export const DayTwo = () => {
   return (
     <DayForm
       day="Two"
-      sourceUrl="https://adventofcode.com/2020/day/2"
+      sourceUrl="https://adventofcode.com/2023/day/2"
       partOneHandler={partOneHandler}
       partTwoHandler={partTwoHandler}
     />
