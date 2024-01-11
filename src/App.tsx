@@ -7,6 +7,7 @@ import { DayTwo } from "./components/Days/DayTwo/DayTwo";
 import { DayThree } from "./components/Days/DayThree/DayThree";
 import { DayFour } from "./components/Days/DayFour/DayFour";
 import { DayFive } from "./components/Days/DayFive/DayFive";
+import { DaySix } from "./components/Days/DaySix/DaySix";
 
 import "./styles.css";
 
@@ -53,6 +54,7 @@ const App = () => {
           <ActiveLink href="/day-three">Day Three</ActiveLink>
           <ActiveLink href="/day-four">Day Four</ActiveLink>
           <ActiveLink href="/day-five">Day Five</ActiveLink>
+          <ActiveLink href="/day-six">Day Six</ActiveLink>
         </nav>
 
         <main>
@@ -73,6 +75,9 @@ const App = () => {
             </Route>
             <Route path="/day-five">
               <DayFive />
+            </Route>
+            <Route path="/day-six">
+              <DaySix />
             </Route>
             <Route path="/:anything*">
               <center>
