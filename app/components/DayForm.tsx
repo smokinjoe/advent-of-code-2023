@@ -5,6 +5,7 @@ type DayFormProps = {
   sourceUrl: string;
   partOneHandler: (data: string) => number;
   partTwoHandler: (data: string) => number;
+  inputData?: string;
 };
 
 export const DayForm = ({
@@ -12,8 +13,9 @@ export const DayForm = ({
   sourceUrl,
   partOneHandler,
   partTwoHandler,
+  inputData,
 }: DayFormProps) => {
-  const [data, setData] = useState("");
+  const [data, setData] = useState(inputData ?? "");
   const [result, setResult] = useState<number>(0);
 
   const handlePartOneClick = () => {
