@@ -10,7 +10,11 @@
     "start": "cross-env NODE_ENV=production node ./server.js",
     "typecheck": "tsc"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "dependencies": {
+    "@prisma/client": "^5.8.1",
     "@remix-run/css-bundle": "^2.5.0",
     "@remix-run/express": "^2.5.0",
     "@remix-run/node": "^2.5.0",
@@ -41,6 +45,10 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "prisma": "^5.8.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.7.0",
     "typescript": "^5.1.6"
   },
   "engines": {
