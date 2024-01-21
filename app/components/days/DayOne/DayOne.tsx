@@ -4,14 +4,14 @@ import { DayProps } from "~/types/DayProps";
 import { partOneHandler } from "./partOne";
 import { partTwoHandler } from "./partTwo";
 
-export const DayOne = ({ inputData }: DayProps) => {
+export const DayOne = ({ day, sourceUrl, content }: DayProps) => {
   return (
     <DayForm
-      day="One"
-      sourceUrl="https://adventofcode.com/2023/day/1"
+      day={`${day}`}
+      sourceUrl={sourceUrl}
       partOneHandler={partOneHandler}
       partTwoHandler={partTwoHandler}
-      inputData={inputData}
+      inputData={content}
     />
   );
 };

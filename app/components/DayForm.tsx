@@ -40,6 +40,7 @@ export const DayForm = ({
         <textarea
           cols={20}
           rows={20}
+          value={data}
           onChange={(e) => setData(e.target.value)}
         />
       </div>
