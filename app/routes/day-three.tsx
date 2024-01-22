@@ -5,13 +5,13 @@ import { db } from "~/utils/db.server";
 import { mapDataToDayResponse } from "~/utils/mapDataToDayResponse";
 import { assertIsDefined } from "~/utils/asserts";
 
-import { DayOne } from "~/components/days/DayOne/DayOne";
+import { DayThree } from "~/components/days/DayThree/DayThree";
 import { InputData } from "~/types/InputType";
 import { asDayInputType } from "~/types/DayInput";
 
 export const loader = async () => {
   const day = await db.day.findUnique({
-    where: { day: 1 },
+    where: { day: 3 },
   });
 
   assertIsDefined(day);
@@ -34,7 +34,7 @@ export const loader = async () => {
   return json({ data: response });
 };
 
-export default function DayOneRoute() {
+export default function DayThreeRoute() {
   const { data } = useLoaderData<typeof loader>();
-  return <DayOne {...data} />;
+  return <DayThree {...data} />;
 }

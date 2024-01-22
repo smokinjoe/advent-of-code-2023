@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { DayNavigation } from "./DayNavigation";
 
 type DayFormProps = {
   day: string;
@@ -30,6 +31,7 @@ export const DayForm = ({
 
   return (
     <div>
+      <DayNavigation />
       <h1>{`Day ${day}`}</h1>
       <p>
         <a href={sourceUrl} target="_blank" rel="noreferrer">
