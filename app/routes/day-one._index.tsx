@@ -18,7 +18,7 @@ export const loader = async () => {
 
   const content = await db.dayInput.findFirst({
     where: {
-      dayId: day?.id,
+      dayId: day.id,
       type: InputData,
     },
   });
@@ -30,7 +30,6 @@ export const loader = async () => {
   };
 
   const response = mapDataToDayResponse(day, enhancedContent);
-
   return json({ data: response });
 };
 
