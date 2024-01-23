@@ -1,5 +1,7 @@
 // import { convertMultiLineStringToArray } from "~/utils/string";
 
+import { bubbleSort } from "./bubbleSort";
+
 // const insert = <T>(arr: T[], index: number, newItem: T): Array<T> => [
 //   // part of the array before the specified index
 //   ...arr.slice(0, index),
@@ -137,6 +139,37 @@ class PlayerHands {
 
   private sortPlayerHandsByStrongestCard() {
     const handsToSort: PlayerHand[] = [...this.playerHands];
+
+    const sortedHands: PlayerHand[] = bubbleSort(
+      handsToSort,
+      (hand, otherHand) => {
+        if (hand.handType === otherHand.handType) {
+          const handCards = [...hand.cards];
+          const otherHandCards = [...otherHand.cards];
+
+          while (handCards.length > 0) {
+            const handCard = handCards.shift() as Card;
+            const otherHandCard = otherHandCards.shift() as Card;
+
+            if (this.isCardWeakerThanCard(handCard, otherHandCard)) {
+              return true;
+            }
+
+            if (this.isCardStrongerThenCard(handCard, otherHandCard)) {
+              return false;
+            }
+          }
+        }
+
+        return false;
+      }
+    );
+
+    this.playerHands = sortedHands.reverse();
+  }
+
+  private _sortPlayerHandsByStrongestCard() {
+    const handsToSort: PlayerHand[] = [...this.playerHands];
     const sortedHands: PlayerHand[] = [];
 
     while (handsToSort.length > 0) {
@@ -226,7 +259,5 @@ class PlayerHands {
 
 export const partOneHandler = (data: string) => {
   const playerHands = new PlayerHands(data);
-  console.log("JOE: Hands", playerHands.getHands());
-  console.log("JOE: playerHands: ", playerHands);
   return playerHands.getBidValues();
 };
