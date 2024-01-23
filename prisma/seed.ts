@@ -152,5 +152,23 @@ function getDays() {
         },
       ],
     },
+    {
+      day: 7,
+      title: "Day Seven",
+      sourceUrl: "https://adventofcode.com/2023/day/7",
+      inputs: [
+        {
+          type: InputData,
+          content: fs.readFileSync(`./prisma/textData/day7input.txt`, "utf8"),
+        },
+        {
+          type: ExampleInputData,
+          content: fs.readFileSync(
+            `./prisma/textData/day7ExampleInput.txt`,
+            "utf8"
+          ),
+        },
+      ],
+    },
   ];
 }
