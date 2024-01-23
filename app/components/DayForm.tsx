@@ -1,11 +1,13 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { DayNavigation } from "./DayNavigation";
 
 type DayFormProps = {
   day: string;
   sourceUrl: string;
   partOneHandler: (data: string) => number;
   partTwoHandler: (data: string) => number;
-  inputData?: string;
+  inputData: string;
+  children?: React.ReactNode;
 };
 
 export const DayForm = ({
@@ -14,9 +16,14 @@ export const DayForm = ({
   partOneHandler,
   partTwoHandler,
   inputData,
+  children,
 }: DayFormProps) => {
-  const [data, setData] = useState(inputData ?? "");
+  const [data, setData] = useState("");
   const [result, setResult] = useState<number>(0);
+
+  useEffect(() => {
+    setData(inputData);
+  }, [inputData]);
 
   const handlePartOneClick = () => {
     const result = partOneHandler(data);
@@ -30,16 +37,19 @@ export const DayForm = ({
 
   return (
     <div>
+      <DayNavigation />
+      {children}
       <h1>{`Day ${day}`}</h1>
       <p>
         <a href={sourceUrl} target="_blank" rel="noreferrer">
-          source
+          Advent of Code link
         </a>
       </p>
       <div>
         <textarea
-          cols={20}
+          cols={65}
           rows={20}
+          value={data}
           onChange={(e) => setData(e.target.value)}
         />
       </div>

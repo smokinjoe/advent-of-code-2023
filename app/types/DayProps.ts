@@ -1,3 +1,5 @@
 export type DayProps = {
-  inputData?: string;
+  day: number;
+  sourceUrl: string;
+  content: string;
 };

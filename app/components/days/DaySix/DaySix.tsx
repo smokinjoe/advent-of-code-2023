@@ -2,16 +2,12 @@ import { Link } from "@remix-run/react";
 
 import { DayForm } from "~/components/DayForm";
 import { DayProps } from "~/types/DayProps";
-import {
-  InputData,
-  PartOneExampleInputData,
-  PartTwoExampleInputData,
-} from "~/types/InputType";
+import { InputData, ExampleInputData } from "~/types/InputType";
 
 import { partOneHandler } from "./partOne";
 import { partTwoHandler } from "./partTwo";
 
-export const DayOne = ({ day, sourceUrl, content }: DayProps) => {
+export const DaySix = ({ day, sourceUrl, content }: DayProps) => {
   return (
     <DayForm
       day={`${day}`}
@@ -21,13 +17,8 @@ export const DayOne = ({ day, sourceUrl, content }: DayProps) => {
       inputData={content}
     >
       <nav>
-        <Link to={`/day-one/${InputData}`}>Input Data</Link>
-        <Link to={`/day-one/${PartOneExampleInputData}`}>
-          Part One Example Data
-        </Link>
-        <Link to={`/day-one/${PartTwoExampleInputData}`}>
-          Part Two Example Data
-        </Link>
+        <Link to={`/day-six/${InputData}`}>Input Data</Link>
+        <Link to={`/day-six/${ExampleInputData}`}>Example Input Data</Link>
       </nav>
     </DayForm>
   );

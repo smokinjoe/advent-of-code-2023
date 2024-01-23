@@ -20,17 +20,15 @@ async function seed() {
       };
       const createdDay = await db.day.create({ data });
 
-      await Promise.all(
-        inputs.map(async (input) => {
-          const { type, content } = input;
-          const data = {
-            type,
-            content,
-            dayId: createdDay.id,
-          };
-          db.dayInput.create({ data });
-        })
-      );
+      inputs.map(async (input) => {
+        const { type, content } = input;
+        const data = {
+          type,
+          content,
+          dayId: createdDay.id,
+        };
+        await db.dayInput.create({ data });
+      });
     })
   );
 }
