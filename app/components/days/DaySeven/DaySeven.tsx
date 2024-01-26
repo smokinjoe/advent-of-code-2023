@@ -4,8 +4,8 @@ import { DayForm } from "~/components/DayForm";
 import { DayProps } from "~/types/DayProps";
 import { InputData, ExampleInputData } from "~/types/InputType";
 
-import { partOneHandler } from "./partOne";
-import { partTwoHandler } from "./partTwo";
+import { partOneHandler } from "./partOne/partOne";
+import { partTwoHandler } from "./partTwo/partTwo";
 
 export const DaySeven = ({ day, sourceUrl, content }: DayProps) => {
   return (

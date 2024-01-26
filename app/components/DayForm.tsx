@@ -35,6 +35,8 @@ export const DayForm = ({
     setResult(result);
   };
 
+  const areButtonsDisabled = data.length === 0 ?? true;
+
   return (
     <div>
       <DayNavigation />
@@ -54,12 +56,12 @@ export const DayForm = ({
         />
       </div>
       <div>
-        <button onClick={handlePartOneClick} disabled={data.length === 0}>
+        <button onClick={handlePartOneClick} disabled={areButtonsDisabled}>
           Run Part One
         </button>
       </div>
       <div>
-        <button onClick={handlePartTwoClick} disabled={data.length === 0}>
+        <button onClick={handlePartTwoClick} disabled={areButtonsDisabled}>
           Run Part Two
         </button>
       </div>
