@@ -22,7 +22,7 @@ export const HandStrength: Record<Hand, number> = {
   [Hands.Null]: 0,
 } as const;
 
-export const CardStrength = [
+export const StandardDeckCardStrength = [
   "2",
   "3",
   "4",
@@ -38,4 +38,22 @@ export const CardStrength = [
   "A",
 ] as const;
 
-export type Card = (typeof CardStrength)[number];
+export type StandardDeckCard = (typeof StandardDeckCardStrength)[number];
+
+export const JokerDeckCardStrength = [
+  "J",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "T",
+  "Q",
+  "K",
+  "A",
+] as const;
+
+export type JokerDeckCard = (typeof JokerDeckCardStrength)[number];

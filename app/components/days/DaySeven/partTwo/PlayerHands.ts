@@ -1,10 +1,6 @@
 import { bubbleSort } from "../bubbleSort";
 import { PlayerHand } from "./PlayerHand";
-import {
-  StandardDeckCard,
-  StandardDeckCardStrength,
-  HandStrength,
-} from "../types";
+import { JokerDeckCard, JokerDeckCardStrength, HandStrength } from "../types";
 
 export class PlayerHands {
   public playerHands: PlayerHand[] = [];
@@ -24,22 +20,22 @@ export class PlayerHands {
   }
 
   private isCardWeakerThanCard(
-    card: StandardDeckCard,
-    otherCard: StandardDeckCard
+    card: JokerDeckCard,
+    otherCard: JokerDeckCard
   ): boolean {
     return (
-      StandardDeckCardStrength.indexOf(card) <
-      StandardDeckCardStrength.indexOf(otherCard)
+      JokerDeckCardStrength.indexOf(card) <
+      JokerDeckCardStrength.indexOf(otherCard)
     );
   }
 
   private isCardStrongerThenCard(
-    card: StandardDeckCard,
-    otherCard: StandardDeckCard
+    card: JokerDeckCard,
+    otherCard: JokerDeckCard
   ): boolean {
     return (
-      StandardDeckCardStrength.indexOf(card) >
-      StandardDeckCardStrength.indexOf(otherCard)
+      JokerDeckCardStrength.indexOf(card) >
+      JokerDeckCardStrength.indexOf(otherCard)
     );
   }
 
@@ -54,8 +50,8 @@ export class PlayerHands {
           const otherHandCards = [...otherHand.cards];
 
           while (handCards.length > 0) {
-            const handCard = handCards.shift() as StandardDeckCard;
-            const otherHandCard = otherHandCards.shift() as StandardDeckCard;
+            const handCard = handCards.shift() as JokerDeckCard;
+            const otherHandCard = otherHandCards.shift() as JokerDeckCard;
 
             if (this.isCardWeakerThanCard(handCard, otherHandCard)) {
               return true;
@@ -86,6 +82,8 @@ export class PlayerHands {
   public getBidValues(): number {
     let totalValue = 0;
     this.playerHands.forEach((hand, index) => {
+      console.log(`JOE: hand: ${hand.handType}: ${hand.cards.join("")}`);
+
       totalValue += hand.bid * (index + 1);
     });
     return totalValue;

@@ -1,16 +1,19 @@
-import { Card, Hands, Hand } from "./types";
+import { StandardDeckCard, Hands, Hand } from "../types";
 
 export class PlayerHand {
   public guid: string = "";
-  public cards: Card[] = [];
+  public cards: StandardDeckCard[] = [];
   public handType: Hand = Hands.Null;
   public bid: number = 0;
 
   private getHandType(): Hand {
-    const cardCount = this.cards.reduce((acc, card) => {
-      acc[card] = acc[card] ? acc[card] + 1 : 1;
-      return acc;
-    }, {} as { [key in Card]: number });
+    const cardCount = this.cards.reduce(
+      (acc: Record<StandardDeckCard, number>, card: StandardDeckCard) => {
+        acc[card] = acc[card] ? acc[card] + 1 : 1;
+        return acc;
+      },
+      {} as { [key in StandardDeckCard]: number }
+    );
 
     const cardCountValues = Object.values(cardCount);
 
@@ -43,7 +46,7 @@ export class PlayerHand {
 
   constructor(data: string) {
     const [hand, bid] = data.split(" ");
-    this.cards = hand.split("") as Card[];
+    this.cards = hand.split("") as StandardDeckCard[];
     this.bid = parseInt(bid);
     this.handType = this.getHandType();
     this.guid = crypto.randomUUID();

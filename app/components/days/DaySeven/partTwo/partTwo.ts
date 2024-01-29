@@ -1,3 +1,6 @@
-// import { convertMultiLineStringToArray } from "~/utils/string";
+import { PlayerHands } from "./PlayerHands";
 
-export const partTwoHandler = () => 0;
+export const partTwoHandler = (data: string) => {
+  const playerHands = new PlayerHands(data);
+  return playerHands.getBidValues();
+};
