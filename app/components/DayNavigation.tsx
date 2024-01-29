@@ -7,6 +7,7 @@ export const DaysData = [
   { day: 4, title: "Day Four", url: "/day-four" },
   { day: 5, title: "Day Five", url: "/day-five" },
   { day: 6, title: "Day Six", url: "/day-six" },
+  { day: 7, title: "Day Seven", url: "/day-seven" },
 ];
 
 export const DayNavigation = () => {
