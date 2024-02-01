@@ -23,10 +23,10 @@ export const DayEight = ({ day, sourceUrl, content }: DayProps) => {
       <nav>
         <Link to={`/day-eight/${InputData}`}>Input Data</Link>
         <Link to={`/day-eight/${PartOneExampleInputData}`}>
-          Example Input Data
+          Part One Example Input Data
         </Link>
         <Link to={`/day-eight/${PartTwoExampleInputData}`}>
-          Example Input Data
+          Part Two Example Input Data
         </Link>
       </nav>
     </DayForm>
