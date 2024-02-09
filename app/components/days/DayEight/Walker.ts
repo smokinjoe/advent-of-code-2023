@@ -141,7 +141,6 @@ export class Walker {
     const allKeysEndingInA = this.map.AllKeysEndingIn(/A$/);
 
     allKeysEndingInA.forEach((key) => {
-      console.log("JOE: key: ", key);
       this.map.setCurrentEntryValue(this.map.entries[key]);
       this.steps.reset();
       this.map.reset();

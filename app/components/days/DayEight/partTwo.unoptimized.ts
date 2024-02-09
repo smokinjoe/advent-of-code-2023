@@ -29,7 +29,6 @@ class MapStore {
 
   private checkWhetherAtEnd = () => {
     const completedMaps = this.activeMaps.filter((entry) => {
-      //   console.log("JOE: entry.currentKey[2]: ", entry.currentKey[2]);
       return entry.currentKey[2] === "Z";
     });
 
@@ -37,18 +36,9 @@ class MapStore {
   };
 
   private takeStep(direction: "left" | "right", activeMap: ActiveMap) {
-    // console.log(
-    //   `JOE: direction: ${direction} from { left: ${activeMap.currentEntry.left}, right: ${activeMap.currentEntry.right} }`
-    // );
     const newKey = activeMap.currentEntry[direction];
     activeMap.currentKey = newKey;
     activeMap.currentEntry = this.entries[newKey];
-
-    // console.log(`JOE: traveled to key: ${newKey}`);
-
-    // console.log(
-    //   `JOE: to key: ${newKey} | { left: ${activeMap.currentEntry.left}, right: ${activeMap.currentEntry.right} }`
-    // );
   }
 
   constructor(data: string[]) {
@@ -88,7 +78,6 @@ class MapStore {
   }
 
   public takeSteps(direction: "left" | "right") {
-    // console.log(`JOE: ==== traveling ${direction} ==== `);
     this.activeMaps.forEach((activeMap) => {
       this.takeStep(direction, activeMap);
     });
@@ -129,7 +118,6 @@ class PartTwo {
       const directionKey = Directions[nextDirection];
 
       if (this.breakPoint > 0 && this.numSteps > this.breakPoint) {
-        console.error("JOE: this.mapStore: ", this.mapStore);
         throw new Error(`Exceeded ${this.breakPoint} steps`);
       }
 
@@ -144,10 +132,6 @@ class PartTwo {
 
 export const partTwoHandler = (data: string) => {
   const partTwo = new PartTwo(data);
-  //   console.log("JOE: partTwo: ", partTwo);
   partTwo.startTravel();
-
-  //   return partTwo.mapStore.activeMaps.length;
-
   return partTwo.stepsTaken;
 };

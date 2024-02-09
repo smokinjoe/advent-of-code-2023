@@ -82,8 +82,6 @@ export class PlayerHands {
   public getBidValues(): number {
     let totalValue = 0;
     this.playerHands.forEach((hand, index) => {
-      console.log(`JOE: hand: ${hand.handType}: ${hand.cards.join("")}`);
-
       totalValue += hand.bid * (index + 1);
     });
     return totalValue;

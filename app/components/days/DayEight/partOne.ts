@@ -45,9 +45,6 @@ class PartOne {
 
 export const partOneHandler = (data: string) => {
   const partOne = new PartOne(data);
-  //   console.log("JOE: partOne: ", partOne);
-
   partOne.startTravel();
-
   return partOne.stepsTaken;
 };
