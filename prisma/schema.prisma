@@ -20,6 +20,7 @@ model Day {
 
 model DayInput {
   id        String @id @default(uuid())
+  title     String
   dayId     String
   day       Day    @relation(fields: [dayId], references: [id])
   type      String

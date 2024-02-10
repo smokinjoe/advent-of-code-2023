@@ -2,6 +2,7 @@ import { InputType } from "./InputType";
 
 export type DayInput = {
   id: string;
+  title: string;
   dayId: string;
   type: InputType;
   content: string;

@@ -2,12 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const db = new PrismaClient();
 import fs from "fs";
 
-import {
-  InputData,
-  ExampleInputData,
-  PartOneExampleInputData,
-  PartTwoExampleInputData,
-} from "~/types/InputType";
+import { InputData, ExampleInputData } from "~/types/InputType";
 
 async function seed() {
   await Promise.all(
@@ -21,8 +16,9 @@ async function seed() {
       const createdDay = await db.day.create({ data });
 
       inputs.map(async (input) => {
-        const { type, content } = input;
+        const { type, content, title } = input;
         const data = {
+          title,
           type,
           content,
           dayId: createdDay.id,
@@ -43,18 +39,21 @@ function getDays() {
       sourceUrl: "https://adventofcode.com/2023/day/1",
       inputs: [
         {
+          title: "Input data",
           type: InputData,
           content: fs.readFileSync(`./prisma/textData/day1input.txt`, "utf8"),
         },
         {
-          type: PartOneExampleInputData,
+          title: "Part one input data",
+          type: ExampleInputData,
           content: fs.readFileSync(
             `./prisma/textData/day1PartOneExampleInput.txt`,
             "utf8"
           ),
         },
         {
-          type: PartTwoExampleInputData,
+          title: "Part two input data",
+          type: ExampleInputData,
           content: fs.readFileSync(
             `./prisma/textData/day1PartTwoExampleInput.txt`,
             "utf8"
@@ -68,10 +67,12 @@ function getDays() {
       sourceUrl: "https://adventofcode.com/2023/day/2",
       inputs: [
         {
+          title: "Input data",
           type: InputData,
           content: fs.readFileSync(`./prisma/textData/day2input.txt`, "utf8"),
         },
         {
+          title: "Example input data",
           type: ExampleInputData,
           content: fs.readFileSync(
             `./prisma/textData/day2ExampleInput.txt`,
@@ -86,10 +87,12 @@ function getDays() {
       sourceUrl: "https://adventofcode.com/2023/day/3",
       inputs: [
         {
+          title: "Input data",
           type: InputData,
           content: fs.readFileSync(`./prisma/textData/day3input.txt`, "utf8"),
         },
         {
+          title: "Example input data",
           type: ExampleInputData,
           content: fs.readFileSync(
             `./prisma/textData/day3ExampleInput.txt`,
@@ -104,10 +107,12 @@ function getDays() {
       sourceUrl: "https://adventofcode.com/2023/day/4",
       inputs: [
         {
+          title: "Input data",
           type: InputData,
           content: fs.readFileSync(`./prisma/textData/day4input.txt`, "utf8"),
         },
         {
+          title: "Example input data",
           type: ExampleInputData,
           content: fs.readFileSync(
             `./prisma/textData/day4ExampleInput.txt`,
@@ -122,10 +127,12 @@ function getDays() {
       sourceUrl: "https://adventofcode.com/2023/day/5",
       inputs: [
         {
+          title: "Input data",
           type: InputData,
           content: fs.readFileSync(`./prisma/textData/day5input.txt`, "utf8"),
         },
         {
+          title: "Example input data",
           type: ExampleInputData,
           content: fs.readFileSync(
             `./prisma/textData/day5ExampleInput.txt`,
@@ -140,10 +147,12 @@ function getDays() {
       sourceUrl: "https://adventofcode.com/2023/day/6",
       inputs: [
         {
+          title: "Input data",
           type: InputData,
           content: fs.readFileSync(`./prisma/textData/day6input.txt`, "utf8"),
         },
         {
+          title: "Example input data",
           type: ExampleInputData,
           content: fs.readFileSync(
             `./prisma/textData/day6ExampleInput.txt`,
@@ -158,10 +167,12 @@ function getDays() {
       sourceUrl: "https://adventofcode.com/2023/day/7",
       inputs: [
         {
+          title: "Input data",
           type: InputData,
           content: fs.readFileSync(`./prisma/textData/day7input.txt`, "utf8"),
         },
         {
+          title: "Example input data",
           type: ExampleInputData,
           content: fs.readFileSync(
             `./prisma/textData/day7ExampleInput.txt`,
@@ -176,18 +187,21 @@ function getDays() {
       sourceUrl: "https://adventofcode.com/2023/day/8",
       inputs: [
         {
+          title: "Input data",
           type: InputData,
           content: fs.readFileSync(`./prisma/textData/day8input.txt`, "utf8"),
         },
         {
-          type: PartOneExampleInputData,
+          title: "Example input data",
+          type: ExampleInputData,
           content: fs.readFileSync(
             `./prisma/textData/day8PartOneExampleInput.txt`,
             "utf8"
           ),
         },
         {
-          type: PartTwoExampleInputData,
+          title: "Example input data",
+          type: ExampleInputData,
           content: fs.readFileSync(
             `./prisma/textData/day8PartTwoExampleInput.txt`,
             "utf8"
