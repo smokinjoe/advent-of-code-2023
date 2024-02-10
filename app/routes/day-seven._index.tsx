@@ -6,8 +6,6 @@ import { mapDataToDayResponse } from "~/utils/mapDataToDayResponse";
 import { assertIsDefined } from "~/utils/asserts";
 
 import { DaySeven } from "~/components/days/DaySeven/DaySeven";
-import { InputData } from "~/types/InputType";
-import { asDayInputType } from "~/types/DayInput";
 
 export const loader = async () => {
   const day = await db.day.findUnique({
@@ -16,20 +14,14 @@ export const loader = async () => {
 
   assertIsDefined(day);
 
-  const content = await db.dayInput.findFirst({
-    where: {
-      dayId: day?.id,
-      type: InputData,
-    },
+  const dayInputs = await db.dayInput.findMany({
+    where: { dayId: day.id },
+    orderBy: { order: "asc" },
   });
 
-  assertIsDefined(content);
-  const enhancedContent = {
-    ...content,
-    type: asDayInputType(content.type),
-  };
+  assertIsDefined(dayInputs);
 
-  const response = mapDataToDayResponse(day, enhancedContent);
+  const response = mapDataToDayResponse(day, dayInputs);
 
   return json({ data: response });
 };

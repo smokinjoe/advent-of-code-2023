@@ -1,21 +1,32 @@
 import type { Day } from "~/types/Day";
-import type { DayInput } from "~/types/DayInput";
+import {
+  asDayInputType,
+  type DayInput,
+  type PrismaDayInput,
+} from "~/types/DayInput";
 
 export type DayResponse = {
   day: number;
   sourceUrl: string;
-  content: string;
+  content: DayInput[];
 };
 
 export const mapDataToDayResponse = (
   day: Day,
-  content: DayInput
+  dayInputs: PrismaDayInput[]
 ): DayResponse => {
-  const response: DayResponse = {
-    day: day?.day ?? -1,
-    sourceUrl: day?.sourceUrl ?? "https://lipsum.com",
-    content: content?.content ?? "",
-  };
+  const result = dayInputs.map((input) => {
+    return {
+      id: input.id,
+      title: input.title,
+      type: asDayInputType(input.type),
+      content: input.content,
+    };
+  });
 
-  return response;
+  return {
+    day: day?.day ?? -1,
+    sourceUrl: day?.sourceUrl ?? "https://lisum.com",
+    content: result,
+  };
 };
