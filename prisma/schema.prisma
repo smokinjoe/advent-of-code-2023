@@ -19,10 +19,12 @@ model Day {
 }
 
 model DayInput {
-  id        String @id @default(uuid())
-  title     String
-  dayId     String
-  day       Day    @relation(fields: [dayId], references: [id])
-  type      String
-  content   String
+  id          String @id @default(uuid())
+  order       Int
+  title       String
+  dayId       String
+  day         Day    @relation(fields: [dayId], references: [id])
+  type        String
+  content     String
+  createdAt   DateTime @default(now())
 }

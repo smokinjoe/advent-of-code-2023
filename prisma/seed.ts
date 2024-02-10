@@ -15,12 +15,13 @@ async function seed() {
       };
       const createdDay = await db.day.create({ data });
 
-      inputs.map(async (input) => {
+      inputs.map(async (input, order) => {
         const { type, content, title } = input;
         const data = {
           title,
           type,
           content,
+          order,
           dayId: createdDay.id,
         };
         await db.dayInput.create({ data });
