@@ -16,7 +16,7 @@ export const DayNavigation = () => {
     <nav>
       <Link to="/">Home</Link>
       {DaysData.map((day) => (
-        <Link key={day.day} to={`${day.url}`}>
+        <Link key={day.day} to={`/day/${day.day}`}>
           {day.title}
         </Link>
       ))}
