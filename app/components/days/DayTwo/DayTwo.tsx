@@ -1,24 +1,28 @@
-import { Link } from "@remix-run/react";
+import { useState } from "react";
 
 import { DayForm } from "~/components/DayForm";
 import { DayProps } from "~/types/DayProps";
-import { ExampleInputData, InputData } from "~/types/InputType";
 
 import { partOneHandler } from "./partOne";
 import { partTwoHandler } from "./partTwo";
 
 export const DayTwo = ({ day, sourceUrl, content }: DayProps) => {
+  const [inputContent, setInputContent] = useState(content[0].content);
+
   return (
     <DayForm
       day={`${day}`}
       sourceUrl={sourceUrl}
       partOneHandler={partOneHandler}
       partTwoHandler={partTwoHandler}
-      inputData={content}
+      inputData={inputContent}
     >
       <nav>
-        <Link to={`/day-two/${InputData}`}>Input Data</Link>
-        <Link to={`/day-two/${ExampleInputData}`}>Example Input Data</Link>
+        {content.map((input, index) => (
+          <button key={index} onClick={() => setInputContent(input.content)}>
+            {input.title}
+          </button>
+        ))}
       </nav>
     </DayForm>
   );
