@@ -8,6 +8,9 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import "@mantine/core/styles.css";
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+
 import stylesUrl from "~/styles/styles.css";
 
 export const links: LinksFunction = () => [
@@ -22,12 +25,15 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <ColorSchemeScript />
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        <MantineProvider>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </MantineProvider>
       </body>
     </html>
   );
