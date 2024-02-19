@@ -1,4 +1,4 @@
-import { DayContainer } from "app/components/DayContainer";
+import { DayContainer } from "~/components/UI/DayContainer";
 import { DayProps } from "~/types/DayProps";
 
 import { partOneHandler } from "../DayEight/partOne";

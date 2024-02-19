@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Textarea, Button, Flex, Space, TextInput } from "@mantine/core";
+import { useEffect, useState } from "react";
+import { Textarea, Button, Flex, Space, TextInput, Title } from "@mantine/core";
 
 import { DayNavigation } from "./DayNavigation";
 
@@ -45,7 +45,7 @@ export const DayForm = ({
   return (
     <>
       <DayNavigation />
-      <h1>{`Day ${day}`}</h1>
+      <Title order={1} lh="lg">{`Day ${day}`}</Title>
       <p>
         <a href={sourceUrl} target="_blank" rel="noreferrer">
           Advent of Code link

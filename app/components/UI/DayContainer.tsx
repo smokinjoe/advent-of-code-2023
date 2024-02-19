@@ -2,8 +2,8 @@ import { Container } from "@mantine/core";
 
 import { useState } from "react";
 
-import { DayForm } from "~/components/DayForm";
-import { InputSelect } from "~/components/InputSelect";
+import { DayForm } from "~/components/UI/DayForm";
+import { InputSelect } from "~/components/UI/InputSelect";
 import { DayProps } from "~/types/DayProps";
 
 type DayContainerProps = DayProps & {
@@ -33,7 +33,7 @@ export const DayContainer = ({
   };
 
   return (
-    <Container size="sm" {...props}>
+    <Container size="lg" {...props}>
       <DayForm
         day={`${day}`}
         sourceUrl={sourceUrl}
