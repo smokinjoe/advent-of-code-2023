@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Burger, Drawer, Space, NavLink } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 
 export const DaysData = [
   { day: 1, title: "Day One", url: "/day-one" },
@@ -12,14 +13,28 @@ export const DaysData = [
 ];
 
 export const DayNavigation = () => {
+  const [opened, { open, close }] = useDisclosure();
+
+  const handleBurgerClick = () => {
+    if (opened) {
+      close();
+      return;
+    }
+
+    open();
+  };
+
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      {DaysData.map((day) => (
-        <Link key={day.day} to={`/day/${day.day}`}>
-          {day.title}
-        </Link>
-      ))}
-    </nav>
+    <Burger opened={opened} onClick={handleBurgerClick}>
+      <Drawer opened={opened} onClose={close} title="Select a Day">
+        <NavLink label="Home" key="home" href="/" />
+
+        <Space h="sm" />
+
+        {DaysData.map((day) => (
+          <NavLink label={day.title} key={day.day} href={`/day/${day.day}`} />
+        ))}
+      </Drawer>
+    </Burger>
   );
 };

@@ -56,7 +56,7 @@ export const DayForm = ({
       <Textarea
         autosize
         resize="vertical"
-        maxRows={35}
+        maxRows={25}
         cols={65}
         rows={15}
         value={data}
