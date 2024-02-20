@@ -14,6 +14,8 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@mantine/core": "^7.5.2",
+    "@mantine/hooks": "^7.5.2",
     "@prisma/client": "5.8.1",
     "@remix-run/css-bundle": "2.5.0",
     "@remix-run/express": "2.5.0",
@@ -48,6 +50,9 @@
     "eslint-plugin-jsx-a11y": "6.7.1",
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "postcss": "^8.4.35",
+    "postcss-preset-mantine": "^1.13.0",
+    "postcss-simple-vars": "^7.0.1",
     "prisma": "5.8.1",
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
