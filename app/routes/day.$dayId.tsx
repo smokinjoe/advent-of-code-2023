@@ -18,6 +18,7 @@ import {
   DaySix,
   DaySeven,
   DayEight,
+  DayNine,
 } from "~/components/days";
 
 const dayComponents: Record<
@@ -32,6 +33,7 @@ const dayComponents: Record<
   6: DaySix,
   7: DaySeven,
   8: DayEight,
+  9: DayNine,
 };
 
 export const loader: LoaderFunction = async ({ params }) => {

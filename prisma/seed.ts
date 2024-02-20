@@ -210,5 +210,25 @@ function getDays() {
         },
       ],
     },
+    {
+      day: 9,
+      title: "Day Nine",
+      sourceUrl: "https://adventofcode.com/2023/day/9",
+      inputs: [
+        {
+          title: "Input data",
+          type: InputData,
+          content: fs.readFileSync(`./prisma/textData/day9input.txt`, "utf8"),
+        },
+        {
+          title: "Example input data",
+          type: ExampleInputData,
+          content: fs.readFileSync(
+            `./prisma/textData/day9ExampleInput.txt`,
+            "utf8"
+          ),
+        },
+      ],
+    },
   ];
 }
