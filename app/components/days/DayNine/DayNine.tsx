@@ -4,7 +4,7 @@ import { DayProps } from "~/types/DayProps";
 import { partOneHandler } from "./partOne";
 import { partTwoHandler } from "./partTwo";
 
-export const DayEight = (props: DayProps) => {
+export const DayNine = (props: DayProps) => {
   return (
     <DayContainer
       {...props}

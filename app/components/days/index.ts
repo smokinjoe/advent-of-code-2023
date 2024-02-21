@@ -6,3 +6,4 @@ export * from "./DayFive/DayFive";
 export * from "./DaySix/DaySix";
 export * from "./DaySeven/DaySeven";
 export * from "./DayEight/DayEight";
+export * from "./DayNine/DayNine";
