@@ -1,4 +1,5 @@
 import "@mantine/core/styles.css";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction } from "@remix-run/node";
@@ -24,6 +25,8 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
+  const queryClient = new QueryClient();
+
   return (
     <html lang="en">
       <head>
@@ -34,12 +37,14 @@ export default function App() {
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </MantineProvider>
+        <QueryClientProvider client={queryClient}>
+          <MantineProvider>
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+          </MantineProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { DayForm } from "~/components/UI/DayForm";
 import { InputSelect } from "~/components/UI/InputSelect";
 import { DayProps } from "~/types/DayProps";
+import { NewInputModal } from "./NewInputModal/NewInputModal";
 
 type DayContainerProps = DayProps & {
   partOneHandler: (data: string) => number;
@@ -43,6 +44,8 @@ export const DayContainer = ({
       >
         <InputSelect inputData={inputData} setInputData={setInputContent} />
       </DayForm>
+
+      <NewInputModal day={day} />
     </Container>
   );
 };
