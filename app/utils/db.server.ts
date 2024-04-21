@@ -1,4 +1,8 @@
+import { Pool } from "pg";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@prisma/client";
+
+const connectionString = `${process.env.DATABASE_URL}`;
 
 let db: PrismaClient;
 
@@ -12,10 +16,14 @@ declare global {
 // create a new connection to the DB with every change either.
 // In production, we'll have a single connection to the DB.
 if (process.env.NODE_ENV === "production") {
-  db = new PrismaClient();
+  const pool = new Pool({ connectionString });
+  const adapter = new PrismaPg(pool);
+  db = new PrismaClient({ adapter });
 } else {
   if (!global.__db__) {
-    global.__db__ = new PrismaClient();
+    const pool = new Pool({ connectionString });
+    const adapter = new PrismaPg(pool);
+    global.__db__ = new PrismaClient({ adapter });
   }
   db = global.__db__;
   db.$connect();
